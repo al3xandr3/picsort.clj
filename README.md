@@ -1,3 +1,4 @@
+
 # picsort
 
 > A Micro Photo Organizer
@@ -6,7 +7,7 @@
 
 [picsort-0.1.0.jar](https://dl.dropbox.com/u/8118736/picsort/picsort-0.1.0.jar)
 
-For Windows, Mac, Linux. Requires Java installed
+For Windows, Mac, Linux. Requires Java installed.
 
 ## Usage
 
@@ -18,7 +19,7 @@ It will create new folders and place/organize your photos into them.
 
 ## Version Log
 
-- 0.1.0 - first working version, requires to place the application in same folder as the photos. Creates folders by day.
+- 0.1.0 - first working version, requires placing the application in same folder as the photos. Creates folders by day.
 
 ## Ideas
 
