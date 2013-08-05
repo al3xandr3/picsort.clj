@@ -1,11 +1,13 @@
 (ns picsort.core
-  (:require [fs.core :as fs]
-            [clj-time.coerce :as tmcoerce]
-            [clj-time.format :as tmformat]
-            [picsort.exif :as exif])
+  (:require
+    [me.raynes.fs :as fs]
+    [clj-time.coerce :as tmcoerce]
+    [clj-time.format :as tmformat]
+    [picsort.exif :as exif])
+    (:use [clojure.tools.logging :only (info error)])
   (:gen-class))
 
-(defn print-date 
+(defn print-date
   [date]
   (tmformat/unparse (tmformat/formatter "yyyyMMdd") (tmcoerce/from-date date)))
 
@@ -13,24 +15,28 @@
   "main driver"
   [path]
   (let [dir  path
-        pics (fs/glob (str dir "*.{jpg,JPG,gif,GIF,png.PNG}"))]
+        pics (fs/glob (str dir "*.{jpg,JPG,gif,GIF,png,PNG}"))]
+    (info (str "PATH: " (fs/absolute-path path)))
+    (info (str "PICS: " pics))
     (doseq [pic pics]
-      (let [newdir (str dir (print-date (exif/date pic)))]
-        ; create dir
-        (if (not (fs/exists? newdir))         
+      (try
+        (let [newdir (str dir "\\" (print-date (exif/date pic)))]
+          ; create dir
+          (if (not (fs/exists? newdir))
           (fs/mkdir newdir))
-        ; copy file
-        (fs/copy pic (str newdir "/" (fs/base-name pic)))
-        ; delete file
-        (fs/delete pic)))))
+          ; copy file
+          (fs/copy pic (str newdir "\\" (fs/base-name pic)))
+          ; delete file
+          (fs/delete pic))
+        (catch Exception e
+         (error e " pic error:" pic)))
+        )))
+;;(organize-pics "c:\\zip\\pics\\")
+;;(organize-pics ".")
+;;(organize-pics "c:/zip/pics\\")
 
+(defn -main []
+  (organize-pics ".\\")
+  )
 
-;(use 'seesaw.core)
-;(native!)
-;(def f (frame :title "Get to know Seesaw"))
-;(-> f pack! show!)
-
-(defn -main
-  [& args]
-  (organize-pics ""))
-
+;;(-main)
