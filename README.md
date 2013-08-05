@@ -24,7 +24,7 @@ It will create new folders and place/organize your photos into them.
 
 ## TODO
 
-  - works on MAC / Linux? (becuase of weird path problems...)
+  - works on MAC / Linux? (because of weird path problems...)
   - photo filters (like instagram)
 
 ## Ideas
