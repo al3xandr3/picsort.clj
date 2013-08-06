@@ -1,0 +1,2 @@
+(user/help)
+(exif.get-exif-dir "C:\zip\pics")

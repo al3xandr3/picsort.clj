@@ -5,6 +5,7 @@
     [clj-time.format :as tmformat]
     [picsort.exif :as exif])
     (:use [clojure.tools.logging :only (info error)])
+    (:import java.io.File)
   (:gen-class))
 
 (defn print-date
@@ -20,23 +21,23 @@
     (info (str "PICS: " pics))
     (doseq [pic pics]
       (try
-        (let [newdir (str dir "\\" (print-date (exif/date pic)))]
+        (let [newdir (str dir (File/separator) (print-date (exif/date pic)))]
           ; create dir
           (if (not (fs/exists? newdir))
           (fs/mkdir newdir))
           ; copy file
-          (fs/copy pic (str newdir "\\" (fs/base-name pic)))
+          (fs/copy pic (str newdir (File/separator) (fs/base-name pic)))
           ; delete file
           (fs/delete pic))
         (catch Exception e
          (error e " pic error:" pic)))
         )))
-;;(organize-pics "c:\\zip\\pics\\")
-;;(organize-pics ".")
-;;(organize-pics "c:/zip/pics\\")
+;; (organize-pics "c:\\zip\\pics\\")
+;; (organize-pics ".")
+;; (organize-pics (str "c:/zip/pics" (File/separator)))
 
 (defn -main []
-  (organize-pics ".\\")
+  (organize-pics (str "." (File/separator)))
   )
 
 ;;(-main)
