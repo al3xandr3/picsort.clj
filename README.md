@@ -5,7 +5,8 @@
 
 ## Download
 
-[picsort.jar](https://dl.dropboxusercontent.com/u/8118736/picsort/picsort.jar)
+[picsort.jar](http://docs.google.com/file/d/0B3ypY27pPCJyemVGUlVkSGt0TlE/)
+
 
 For Windows, Mac, Linux. Requires Java installed.
 
